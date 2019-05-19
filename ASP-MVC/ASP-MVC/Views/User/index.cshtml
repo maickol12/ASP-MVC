@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ASP_MVC.Models.tblUsers>
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>index</h2>
+
+<p>
+    @Html.ActionLink("Agregar", "Agregar")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.vName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.vName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bActive)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { idUser=item.idUser }) |
+            @Html.ActionLink("Detalles", "Detalles", new { idUser=item.idUser }) |
+            @Html.ActionLink("Delete", "Eliminar", new { idUser=item.idUser },new { @class = "classEliminar"})
+        </td>
+    </tr>
+}
+</table>
+@section scripts{
+    <script>
+        $(".classEliminar").click(function(e){
+            if (!confirm("Estas seguro de eliminar?"))
+            {
+                e.preventDefault();
+            }
+                
+        });
+    </script>   
+}
